@@ -2877,7 +2877,7 @@ void cfg_file_draw()      {
                (g_cfg_slotdrive >> 8), (g_cfg_slotdrive & 0xff) + 1);
   } else {
     cfg_htab_vtab(5, 0);
-    cfg_printf("\bSelect file to use as %-40s\b",
+    cfg_printf("\bSpace to select path to use as %-40s\b",
                cfg_shorten_filename(g_cfg_file_def_name, 40));
   }
   cfg_htab_vtab(2, 1);
