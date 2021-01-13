@@ -1426,7 +1426,7 @@ void insert_disk(int slot, int drive, const char *name, int ejected, int force_s
   }
   name_ptr[name_len] = 0;
 #else
-  strncpy(name_ptr, name, name_len + 1);
+  strcpy(name_ptr, name);
 #endif
   dsk->name_ptr = name_ptr;
 
@@ -1434,7 +1434,7 @@ void insert_disk(int slot, int drive, const char *name, int ejected, int force_s
   if(partition_name != 0) {
     part_len = strlen(partition_name) + 1;
     part_ptr = (char *)malloc(part_len);
-    strncpy(part_ptr, partition_name, part_len);
+    strcpy(part_ptr, partition_name);
     dsk->partition_name = part_ptr;
   }
   dsk->partition_num = part_num;
@@ -1458,7 +1458,7 @@ void insert_disk(int slot, int drive, const char *name, int ejected, int force_s
     can_write = 0;
 
     uncomp_ptr = (char *)malloc(name_len + 1);
-    strncpy(uncomp_ptr, name_ptr, name_len + 1);
+    strcpy(uncomp_ptr, name_ptr);
     uncomp_ptr[name_len - 3] = 0;
 
     system_len = 2*name_len + 100;
@@ -2570,7 +2570,7 @@ void cfg_file_add_dirent(Cfg_listhdr *listhdrptr, const char *nameptr, int is_di
                                                  listhdrptr->max * sizeof(Cfg_dirent));
   }
   ptr = (char*)malloc(namelen+1+is_dir);       // OG Added cast
-  strncpy(ptr, nameptr, namelen+1);
+  strcpy(ptr, nameptr);
   if(is_dir) {
     strcat(ptr, "/");
   }
