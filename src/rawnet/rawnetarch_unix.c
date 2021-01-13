@@ -66,6 +66,8 @@
 #include "rawnetsupp.h"
 
 #if defined(__linux__)
+#include <unistd.h> //support for close
+#include <arpa/inet.h> //support for close
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <net/if.h>

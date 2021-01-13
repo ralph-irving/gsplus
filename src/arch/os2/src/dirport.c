@@ -81,7 +81,7 @@ int closedir (DIR *dir) {
    Author
 
    Mark Martinec <mark.martinec@ijs.si>, April 1999, June 2000
-   Copyright � 1999, Mark Martinec
+   Copyright © 1999, Mark Martinec
 
  */
 
@@ -248,7 +248,8 @@ int vasprintf(char **ptr, const char *fmt, va_list ap) {
   { va_list ap2;
     va_copy(ap2, ap);  /* don't consume the original ap, we'll need it again */
     str_l = portable_vsnprintf(NULL, (size_t)0, fmt, ap2);/*get required size*/
-    va_end(ap2);}
+    va_end(ap2);
+  }
   assert(str_l >= 0);        /* possible integer overflow if str_m > INT_MAX */
   *ptr = (char *) malloc(str_m = (size_t)str_l + 1);
   if (*ptr == NULL) { errno = ENOMEM; str_l = -1; }
@@ -296,7 +297,8 @@ int vasnprintf (char **ptr, size_t str_m, const char *fmt, va_list ap) {
   { va_list ap2;
     va_copy(ap2, ap);  /* don't consume the original ap, we'll need it again */
     str_l = portable_vsnprintf(NULL, (size_t)0, fmt, ap2);/*get required size*/
-    va_end(ap2);}
+    va_end(ap2);
+  }
   assert(str_l >= 0);        /* possible integer overflow if str_m > INT_MAX */
   if ((size_t)str_l + 1 < str_m) str_m = (size_t)str_l + 1;      /* truncate */
   /* if str_m is 0, no buffer is allocated, just set *ptr to NULL */
@@ -709,7 +711,8 @@ int portable_vsnprintf(char *str, size_t str_m, const char *fmt, va_list ap) {
             }
             /* zero padding to specified precision? */
             if (num_of_digits < precision)
-              number_of_zeros_to_pad = precision - num_of_digits; }
+              number_of_zeros_to_pad = precision - num_of_digits;
+          }
           /* zero padding to specified minimal field width? */
           if (!justify_left && zero_padding) {
             int n = min_field_width - (str_arg_l+number_of_zeros_to_pad);
@@ -785,7 +788,8 @@ int portable_vsnprintf(char *str, size_t str_m, const char *fmt, va_list ap) {
                         (n>avail ? avail : n));
           }
           str_l += n;
-        }}
+        }
+      }
       /* insert right padding */
       if (justify_left) {          /* right blank padding to the field width */
         int n = min_field_width - (str_arg_l+number_of_zeros_to_pad);

@@ -25,12 +25,6 @@
  */
 
 #ifdef HAVE_RAWNET
-#else
-  #error RAWNET.H should not be included if HAVE_RAWNET is not defined!
-#endif /* #ifdef HAVE_RAWNET */
-
-#ifndef VICE_RAWNET_H
-#define VICE_RAWNET_H
 
 /*
  This is a helper for the _receive() function of the emulated ethernet chip to determine
@@ -74,4 +68,6 @@ extern char *rawnet_get_standard_interface(void);
 
 extern int rawnet_status(void);
 
-#endif
+#else
+  #error RAWNET.H should not be included if HAVE_RAWNET is not defined!
+#endif /* #ifdef HAVE_RAWNET */

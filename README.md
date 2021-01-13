@@ -25,7 +25,7 @@ Install MSYS2 (not MSYS, not cygwin)
 ## Linux, OS X, build
     mkdir build
     cd build
-    cmake ..
+    cmake .. -DWITH_RAWNET=ON
     (optionally: ccmake .. to configure stuff)
     make
 
