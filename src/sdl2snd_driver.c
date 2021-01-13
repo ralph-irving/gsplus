@@ -131,7 +131,7 @@ long sound_init_device_sdl() {
   wanted.freq = g_preferred_rate;
   wanted.format = AUDIO_S16SYS;
   wanted.channels = NUM_CHANNELS;
-  wanted.samples = 512;
+  wanted.samples = 2048;
   wanted.callback = _snd_callback;
   wanted.userdata = NULL;
 
