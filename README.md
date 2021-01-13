@@ -1,6 +1,6 @@
 # GS+ 
 
-An Apple IIgs emulator based on KEGS
+An Apple IIgs emulator derived from GSport, which is based on KEGS
 
 # Build instructions
 
