@@ -8,6 +8,7 @@
 #include "defc.h"
 #include <stdarg.h>
 #include <ctype.h>
+#include <string.h>
 #include "config.h"
 #include "glog.h"
 #include "imagewriter.h"
