@@ -789,6 +789,7 @@ static int open_data_fork(const char *path, word16 *access, word16 *error) {
 }
 #if defined(__APPLE__) || defined(__linux__)
   static int open_resource_fork(const char *path, word16 *access, word16 *error) {
+  #if defined(__APPLE__)
   // os x / hfs/apfs don't need to specifically create a resource fork.
   // or do they?
 
@@ -1552,8 +1553,9 @@ static word32 fst_change_path(int class, const char *path1, const char *path2) {
     return invalidAccess;
 
   // rename will delete any previous file. ChangePath should return an error.
-  if (stat(path2, &st) == 0) return dupPathname;
 #if ! defined(__linux__)
+  if (stat(path2, &st) == 0) return dupPathname;
+   
   if (rename(path1, path2) < 0) return host_map_errno_path(errno, path2);
 #else
   //on linux rename both the file and the resource file.
