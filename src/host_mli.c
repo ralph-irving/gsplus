@@ -1,5 +1,4 @@
-
-#define _BSD_SOURCE
+#define _DEFAULT_SOURCE
 
 #ifdef _WIN32
 #include <Windows.h>
