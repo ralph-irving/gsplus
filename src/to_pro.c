@@ -7,6 +7,7 @@
 
 #include "defc.h"
 #include <ctype.h>
+#include <string.h>
 
 #include "prodos.h"
 
@@ -367,7 +368,7 @@ void format_memdisk(ProDisk *disk, char *name)      {
   set_l2byte(&(dir->next_blk), 3);
   vol_hdr = (Vol_hdr *)&(dir->file_entries[0]);
   vol_hdr->storage_type_name_len = 0xf0 + strlen(name);
-  strncpy((char *)vol_hdr->vol_name, name, strlen(name));
+  strcpy (vol_hdr->vol_name, name);
   vol_hdr->version = 0;
   vol_hdr->min_version = 0;
   vol_hdr->access = 0xc3;
