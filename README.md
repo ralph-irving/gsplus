@@ -3,6 +3,9 @@ GS+ is an Apple IIgs emulator derived from GSport, which itself is based on KEGS
 
 Once you have started the emulator, F4 is used to configure ROM and disk locations and MUCH more.
 
+# Enabling Host FST Support
+Host FST support is a really nifty feature that provides access to your host filesystem from the GS/OS finder. There are two pieces that must work together for your computer to show up on the GS/OS desktop. One is that you must configure Host FST support (F4). You ALSO need to install a few files into your virtual IIgs hard drive. These files are supplied on the host.mli.po disk image (included in this repository) that you must mount inside GS/OS. Detailed instructions are provided by the project maintainer at https://github.com/ksherlock/host-fst
+
 # Build instructions
 
 ## OS X dependencies
