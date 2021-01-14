@@ -1,6 +1,7 @@
-# GS+ 
+# GS+ Intro & Usage
+GS+ is an Apple IIgs emulator derived from GSport, which itself is based on KEGS. Although GS+ can be launched without command-line arguments, there are several command-line arguments that are especially helpful. For example, -resizeable launches emulator in a resizable window. For a full list of optional flags, pass -h to the emulator, e.g. ./GSplus -h.
 
-An Apple IIgs emulator derived from GSport, which is based on KEGS
+Once you have started the emulator, F4 is used to configure ROM and disk locations and MUCH more.
 
 # Build instructions
 
