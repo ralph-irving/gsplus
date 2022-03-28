@@ -757,6 +757,10 @@ void memory_ptr_init() {
   g_memory_ptr = memalloc_align(mem_size, 256, &g_memory_alloc_ptr);
 
   glogf("RAM size is %d bytes (%.2fMB)", mem_size, (double)mem_size/(1024.0*1024.0));
+#if 1
+  glogf("g_memory_ptr: %08x\n", (word32)g_memory_ptr);
+#endif
+
 }
 
 // OG Added memory_ptr_shut
