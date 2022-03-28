@@ -231,7 +231,7 @@ void debug_handle_event() {
         event_set_mem(dbg_cmd_queue[0].cdata);
         break;
       case G_DBG_COMMAND_QUIT:
-        exit(0);  // HALT!
+        my_exit(0);  // HALT!
         break;
       case G_DBG_COMMAND_DEBUGGER:
         //do_debug_intfc();
