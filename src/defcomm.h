@@ -54,6 +54,18 @@
  *
  */
 #define ENGINE_FPLUS_PTR	0x00
+#if defined(__i386__)
+#define ENGINE_FCYCLES		0x04
+#define ENGINE_REG_KPC		0x0c
+#define ENGINE_REG_ACC		0x10
+#define ENGINE_REG_XREG		0x14
+#define ENGINE_REG_YREG		0x18
+#define ENGINE_REG_STACK	0x1c
+#define ENGINE_REG_DBANK	0x20
+#define ENGINE_REG_DIRECT	0x24
+#define ENGINE_REG_PSR		0x28
+#define ENGINE_FLAGS		0x2c
+#elif defined(__x86_64__)
 #define ENGINE_FCYCLES		0x08
 #define ENGINE_REG_KPC		0x10
 #define ENGINE_REG_ACC		0x14
@@ -64,6 +76,7 @@
 #define ENGINE_REG_DIRECT	0x28
 #define ENGINE_REG_PSR		0x2c
 #define ENGINE_FLAGS		0x30
+#endif
 
 #define LOG_PC_DCYCS		0x00
 #define LOG_PC_DBANK_KPC	0x08
