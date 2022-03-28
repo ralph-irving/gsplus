@@ -31,6 +31,8 @@ int XShmQueryExtension(Display *display);
 
 #define FONT_NAME_STATUS        "8x13"
 
+extern void quitEmulator();
+
 extern int Verbose;
 
 extern int g_warp_pointer;
@@ -543,7 +545,7 @@ void dev_video_init() {
 
   g_installed_full_superhires_colormap = !g_needs_cmap;
 
-  myTextString[0] = "GSport";
+  myTextString[0] = "GSplus";
 
   XStringListToTextProperty(myTextString, 1, &my_winText);
 
@@ -554,8 +556,8 @@ void dev_video_init() {
   my_winSizeHints.min_height = base_height;
   my_winSizeHints.max_width = BASE_WINDOW_WIDTH;
   my_winSizeHints.max_height = base_height;
-  my_winClassHint.res_name = "GSport";
-  my_winClassHint.res_class = "GSport";
+  my_winClassHint.res_name = "GSplus";
+  my_winClassHint.res_class = "GSplus";
 
   XSetWMProperties(g_display, g_a2_win, &my_winText, &my_winText, 0,
                    0, &my_winSizeHints, 0, &my_winClassHint);
@@ -897,8 +899,8 @@ void x_toggle_status_lines() {
   my_winSizeHints.min_height = base_height;
   my_winSizeHints.max_width = BASE_WINDOW_WIDTH;
   my_winSizeHints.max_height = base_height;
-  my_winClassHint.res_name = "GSport";
-  my_winClassHint.res_class = "GSport";
+  my_winClassHint.res_name = "GSplus";
+  my_winClassHint.res_class = "GSplus";
   XSetWMProperties(g_display, g_a2_win, 0, 0, 0,
                    0, &my_winSizeHints, 0, &my_winClassHint);
   XMapRaised(g_display, g_a2_win);
@@ -1080,7 +1082,7 @@ void check_input_events() {
         if (ev.xclient.data.l[0] == (long)WM_DELETE_WINDOW)
         {
           iwm_shut();
-          my_exit(1);
+	  quitEmulator();
         }
         break;
       default:
@@ -1324,7 +1326,8 @@ void x_full_screen(int do_full) {
 void x_release_kimage(Kimage* kimage_ptr) {
   if (kimage_ptr->dev_handle == (void*)-1)
   {
-    free(kimage_ptr->data_ptr);
+    if (kimage_ptr->data_ptr)
+      free(kimage_ptr->data_ptr);
     kimage_ptr->data_ptr = NULL;
   }
 }

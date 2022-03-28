@@ -1693,7 +1693,7 @@ SDL_FreeSurface(image);*/
 		{
 			DOCINFO docinfo;
 			docinfo.cbSize = sizeof(docinfo);
-			docinfo.lpszDocName = "GSport Virtual ImageWriter";
+			docinfo.lpszDocName = "GSplus Virtual ImageWriter";
 			docinfo.lpszOutput = NULL;
 			docinfo.lpszDatatype = NULL;
 			docinfo.fwType = 0;
@@ -1870,7 +1870,7 @@ SDL_FreeSurface(image);*/
 			fprintf(psfile, "%%!PS-Adobe-3.0\n");
 			fprintf(psfile, "%%%%Pages: (atend)\n");
 			fprintf(psfile, "%%%%BoundingBox: 0 0 %i %i\n", (Bit16u)(defaultPageWidth*72), (Bit16u)(defaultPageHeight*72));
-			fprintf(psfile, "%%%%Creator: GSport Virtual Printer\n");
+			fprintf(psfile, "%%%%Creator: GSplus Virtual Printer\n");
 			fprintf(psfile, "%%%%DocumentData: Clean7Bit\n");
 			fprintf(psfile, "%%%%LanguageLevel: 2\n");
 			fprintf(psfile, "%%%%EndComments\n");
@@ -1995,7 +1995,7 @@ SDL_FreeSurface(image);*/
 			fprintf(psfile, "%%!PS-Adobe-3.0\n");
 			fprintf(psfile, "%%%%Pages: (atend)\n");
 			fprintf(psfile, "%%%%BoundingBox: 0 0 %i %i\n", (Bit16u)(defaultPageWidth*72), (Bit16u)(defaultPageHeight*72));
-			fprintf(psfile, "%%%%Creator: GSport Virtual Printer\n");
+			fprintf(psfile, "%%%%Creator: GSplus Virtual Printer\n");
 			fprintf(psfile, "%%%%DocumentData: Clean7Bit\n");
 			fprintf(psfile, "%%%%LanguageLevel: 2\n");
 			fprintf(psfile, "%%%%EndComments\n");
