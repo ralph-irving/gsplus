@@ -7,6 +7,7 @@
 
 #include "defc.h"
 #include "protos_engine_c.h"
+#include "glog.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -853,12 +854,12 @@ void fixed_memory_ptrs_init()      {
   g_rom_cards_ptr = memalloc_align(16*256, 256, (void**)&g_rom_cards_ptr_allocated);
 
 #if 0
-  printf("g_memory_ptr: %08x, dummy_mem: %08x, slow_mem_ptr: %08x\n",
-         (word32)g_memory_ptr, (word32)g_dummy_memory1_ptr,
+  glogf("dummy_mem: %08x, slow_mem_ptr: %08x",
+         (word32)g_dummy_memory1_ptr,
          (word32)g_slow_memory_ptr);
-  printf("g_rom_fc_ff_ptr: %08x, g_rom_cards_ptr: %08x\n",
+  glogf("g_rom_fc_ff_ptr: %08x, g_rom_cards_ptr: %08x",
          (word32)g_rom_fc_ff_ptr, (word32)g_rom_cards_ptr);
-  printf("page_info_rd = %08x, page_info_wr end = %08x\n",
+  glogf("page_info_rd = %08x, page_info_wr end = %08x",
          (word32)&(page_info_rd_wr[0]),
          (word32)&(page_info_rd_wr[PAGE_INFO_PAD_SIZE+0x1ffff].rd_wr));
 #endif
@@ -867,10 +868,14 @@ void fixed_memory_ptrs_init()      {
 // OG added fixed_memory_ptrs_shut
 void fixed_memory_ptrs_shut() {
 
-  free(g_slow_memory_ptr_allocated);
-  free(g_dummy_memory1_ptr_allocated);
-  free(g_rom_fc_ff_ptr_allocated);
-  free(g_rom_cards_ptr_allocated);
+  if ( g_slow_memory_ptr_allocated )
+    free(g_slow_memory_ptr_allocated);
+  if ( g_dummy_memory1_ptr_allocated )
+    free(g_dummy_memory1_ptr_allocated);
+  if ( g_rom_fc_ff_ptr_allocated )
+    free(g_rom_fc_ff_ptr_allocated);
+  if ( g_rom_cards_ptr_allocated )
+    free(g_rom_cards_ptr_allocated);
   g_slow_memory_ptr=g_slow_memory_ptr_allocated= NULL;
   g_dummy_memory1_ptr = g_dummy_memory1_ptr_allocated = NULL;
   g_rom_fc_ff_ptr = g_rom_fc_ff_ptr_allocated = NULL;
