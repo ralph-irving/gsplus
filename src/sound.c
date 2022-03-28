@@ -432,7 +432,9 @@ void sound_shutdown()      {
   // OG Free up allocated memory
   if (g_sound_shm_addr)
   {
+#if defined(HAVE_SDL)
     free(g_sound_shm_addr);
+#endif
     g_sound_shm_addr = NULL;
   }
 }

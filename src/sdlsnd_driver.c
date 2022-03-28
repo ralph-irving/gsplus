@@ -28,7 +28,6 @@ extern word32 *g_sound_shm_addr;
 extern int g_preferred_rate;
 
 int g_sdlsnd_buflen = 0x1000;
-word32 *bptr = NULL;
 int g_sdlsnd_write_idx;
 int g_sdlsnd_read_idx;
 
@@ -84,9 +83,9 @@ void sdl_send_audio(word32      *ptr, int size, int real_samps) {
   int i;
   for (i=0; i<size; i++) {
     if (real_samps) {
-      bptr[g_sdlsnd_write_idx++] = ptr[i];
+      g_sound_shm_addr[g_sdlsnd_write_idx++] = ptr[i];
     } else {
-      bptr[g_sdlsnd_write_idx++] = 0;
+      g_sound_shm_addr[g_sdlsnd_write_idx++] = 0;
     }
     if (g_sdlsnd_write_idx>g_sdlsnd_buflen) {
       g_sdlsnd_write_idx=0;
@@ -106,7 +105,7 @@ void handle_sdl_snd(void *userdata, Uint8 *stream, int len) {
     if(g_playbuf_buffered <= 0) {
       stream[i] = 0;
     } else {
-      stream[i] = bptr[g_sdlsnd_read_idx++];
+      stream[i] = g_sound_shm_addr[g_sdlsnd_read_idx++];
       if(g_sdlsnd_read_idx == g_sdlsnd_buflen)
         g_sdlsnd_read_idx = 0;
       g_playbuf_buffered--;
@@ -120,17 +119,17 @@ void handle_sdl_snd(void *userdata, Uint8 *stream, int len) {
   //len = ( g_sdlsnd_read_idx+len < g_sdlsnd_buflen ? len : g_sdlsnd_read_idx+len);
   SDL_memset(stream, 0, len);
   if (g_sdlsnd_read_idx+len < g_sdlsnd_buflen) {
-    SDL_memcpy (stream, &bptr[g_sdlsnd_read_idx], len);
+    SDL_memcpy (stream, &g_sound_shm_addr[g_sdlsnd_read_idx], len);
     g_sdlsnd_read_idx += len;
     g_playbuf_buffered -= len;
   } else {
     /*
        int top_len = 0;
        top_len = g_sdlsnd_buflen - g_sdlsnd_read_idx;
-       SDL_memcpy (stream, &bptr[g_sdlsnd_read_idx], top_len);
+       SDL_memcpy (stream, &g_sound_shm_addr[g_sdlsnd_read_idx], top_len);
        g_sdlsnd_read_idx = 0;
        g_playbuf_buffered -= top_len;
-       //  SDL_memcpy (stream+top_len, bptr[g_sdlsnd_read_idx], len-top_len);
+       //  SDL_memcpy (stream+top_len, g_sound_shm_addr[g_sdlsnd_read_idx], len-top_len);
        g_sdlsnd_read_idx += len-top_len;
        g_playbuf_buffered -= len-top_len;
      */
@@ -168,12 +167,12 @@ void child_sound_init_sdl()      {
   int blen;
   blen = (SOUND_SHM_SAMP_SIZE * SAMPLE_CHAN_SIZE * 2);  // *2 unnecessary?
   g_sdlsnd_buflen = blen;
-  bptr = (byte*)malloc(blen);
-  if(bptr == NULL) {
+  g_sound_shm_addr = (byte*)malloc(blen);
+  if(g_sound_shm_addr == NULL) {
     printf("Unabled to allocate sound buffer\n");
     exit(1);
   }
-  memset(bptr, 0, SOUND_SHM_SAMP_SIZE*SAMPLE_CHAN_SIZE *2);  // zero out the buffer
+  memset(g_sound_shm_addr, 0, SOUND_SHM_SAMP_SIZE*SAMPLE_CHAN_SIZE *2);  // zero out the buffer
 
   g_sdlsnd_write_idx = 0; // initialize
   g_sdlsnd_read_idx = 0;
