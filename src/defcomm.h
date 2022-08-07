@@ -65,7 +65,7 @@
 #define ENGINE_REG_DIRECT	0x24
 #define ENGINE_REG_PSR		0x28
 #define ENGINE_FLAGS		0x2c
-#elif defined(__x86_64__)
+#elif defined(__x86_64__) || defined(__arm64__)
 #define ENGINE_FCYCLES		0x08
 #define ENGINE_REG_KPC		0x10
 #define ENGINE_REG_ACC		0x14
