@@ -1644,7 +1644,8 @@ int doc_read_c03d(double dcycs)     {
         doc_saved_val = rptr->vol;
         break;
       case 0x3:                 /* data register */
-        /* HACK: make this call sound_play sometimes */
+        dsamps = dcycs * g_dsamps_per_dcyc;
+        sound_play(dsamps);
         doc_saved_val = rptr->last_samp_val;
         break;
       case 0x4:                 /* wave ptr register */
