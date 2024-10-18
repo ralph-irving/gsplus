@@ -428,7 +428,7 @@ void Imagewriter::updateFont()
 void Imagewriter::updateSwitch()
 {
 	//Set international character mappping (Switches A-1 to A3)
-	int charmap = (switcha & SWITCHA_CHARSET_MASK);
+	int charmap = (switcha & 7);
 	curMap[0x23] = intCharSets[charmap][0];
 	curMap[0x40] = intCharSets[charmap][1];
 	curMap[0x5b] = intCharSets[charmap][2];
@@ -452,7 +452,7 @@ void Imagewriter::updateSwitch()
 	}
 
 	//MSB control (Switch B-6)
-	if (!(switchb&32))
+	if (!(switchb & 32))
 	{
 		msb = 255;
 	}
@@ -1149,7 +1149,7 @@ bool Imagewriter::processCommandChar(Bit8u ch)
 		return true;
 	case 0x0d:		// Carriage Return (CR)
 		curX = leftMargin;
-		if ((switcha & SWITCHA_LFAFTERCR)) curY += lineSpacing; // If switch A-8 is set, send a LF after CR
+		if ((switcha & 128)) curY += lineSpacing; // If switch A-8 is set, send a LF after CR
 		if (!autoFeed)
 			return true;
 	case 0x0a:		// Line feed
@@ -1300,7 +1300,7 @@ void Imagewriter::printChar(Bit8u ch)
 	// For line printing
 	Bit16u lineStart = PIXX;
 	// Print a slashed zero if the softswitch B-1 is set
-	if(switchb&1 && ch=='0') slashzero(penX,penY);
+	if(switchb & 1 && ch=='0') slashzero(penX,penY);
 	// advance the cursor to the right
 	Real64 x_advance;
 	if (style &	STYLE_PROP)
