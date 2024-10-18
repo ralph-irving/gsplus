@@ -433,7 +433,7 @@ void Imagewriter::updateFont()
 void Imagewriter::updateSwitch()
 {
 	//Set international character mappping (Switches A-1 to A3)
-	int charmap = (switcha & 7);
+	int charmap = (switcha & SWITCHA_CHARSET_MASK);
 	curMap[0x23] = intCharSets[charmap][0];
 	curMap[0x40] = intCharSets[charmap][1];
 	curMap[0x5b] = intCharSets[charmap][2];
@@ -1154,7 +1154,7 @@ bool Imagewriter::processCommandChar(Bit8u ch)
 		return true;
 	case 0x0d:		// Carriage Return (CR)
 		curX = leftMargin;
-		if ((switcha & 128)) curY += lineSpacing; // If switch A-8 is set, send a LF after CR
+		if ((switcha & SWITCHA_LFAFTERCR)) curY += lineSpacing; // If switch A-8 is set, send a LF after CR
 		if (!autoFeed)
 			return true;
 	case 0x0a:		// Line feed
